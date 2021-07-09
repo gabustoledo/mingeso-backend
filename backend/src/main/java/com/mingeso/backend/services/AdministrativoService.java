@@ -53,4 +53,9 @@ public class AdministrativoService {
         AdministrativoRepository.deleteAdministrativo(Id);
     }
 
+    @PostMapping("/AdministrativoLogin")
+    @ResponseBody
+    public List<Administrativo> login(@RequestBody Administrativo Administrativo){
+        return AdministrativoRepository.login(Administrativo);
+    }
 }

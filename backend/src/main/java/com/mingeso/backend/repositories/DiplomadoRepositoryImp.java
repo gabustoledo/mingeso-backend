@@ -29,15 +29,9 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
     @Override
     public Diplomado createDiplomado(Diplomado diplomado) {
         try(Connection conn = sql2o.open()){
-            int insertedId = (int) conn.createQuery("INSERT INTO diplomado (nombre, objetivo, plan_de_estudio, cuerpo_docente, arancel, admision, contacto, folleto) VALUES (:diplomadoNombre,:diplomadoObjetivo,:diplomadoPlanDeEstudio,:diplomadoCuerpoDocente,:diplomadoArancel,:diplomadoAdmision,:diplomadoContacto,:diplomadoFolleto)", true)
+            int insertedId = (int) conn.createQuery("INSERT INTO diplomado (nombre, objetivo) VALUES (:diplomadoNombre,:diplomadoObjetivo)", true)
                                         .addParameter("diplomadoNombre", diplomado.getNombre())
 										.addParameter("diplomadoObjetivo", diplomado.getObjetivo())
-										.addParameter("diplomadoPlanDeEstudio", diplomado.getPlanDeEstudio())
-										.addParameter("diplomadoCuerpoDocente", diplomado.getCuerpoDocente())
-										.addParameter("diplomadoArancel", diplomado.getArancel())
-										.addParameter("diplomadoAdmision", diplomado.getAdmision())
-										.addParameter("diplomadoContacto", diplomado.getContacto())
-										.addParameter("diplomadoFolleto", diplomado.getFolleto())
                     .executeUpdate().getKey();
 										diplomado.setId(insertedId);
             return diplomado;
@@ -63,16 +57,10 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
     @Override
     public void updateDiplomado(Diplomado diplomado) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("Update diplomado Set nombre = :diplomadoNombre, objetivo = :diplomadoObjetivo, plan_de_estudio = :diplomadoPlanDeEstudio, cuerpo_docente = :diplomadoCuerpoDocente, arancel = :diplomadoArancel, admision = :diplomadoAdmision, contacto = :diplomadoContacto, folleto = :diplomadoFolleto WHERE id = :Id")
+            conn.createQuery("Update diplomado Set nombre = :diplomadoNombre, objetivo = :diplomadoObjetivo WHERE id = :Id")
 										.addParameter("Id", diplomado.getId())
 										.addParameter("diplomadoNombre", diplomado.getNombre())
 										.addParameter("diplomadoObjetivo", diplomado.getObjetivo())
-										.addParameter("diplomadoPlanDeEstudio", diplomado.getPlanDeEstudio())
-										.addParameter("diplomadoCuerpoDocente", diplomado.getCuerpoDocente())
-										.addParameter("diplomadoArancel", diplomado.getArancel())
-										.addParameter("diplomadoAdmision", diplomado.getAdmision())
-										.addParameter("diplomadoContacto", diplomado.getContacto())
-										.addParameter("diplomadoFolleto", diplomado.getFolleto())
                     .executeUpdate();
                    
         }catch(Exception e){

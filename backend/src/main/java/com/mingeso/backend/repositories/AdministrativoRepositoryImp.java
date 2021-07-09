@@ -88,4 +88,25 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             System.out.println(e.getMessage());
         }  
     }
+
+    // LOGIN
+    @Override
+    public List<Administrativo> login(Administrativo administrativo) {
+        int existe = 0;
+        try(Connection conn = sql2o.open()){
+            existe = conn.createQuery("select count(*) from administrativo where correo=:administrativoCorreo and pass=:administrativoPass;")
+                .addParameter("administrativoCorreo", administrativo.getCorreo())
+                .addParameter("administrativoPass", administrativo.getContrasena())
+                .executeScalar(Integer.class);
+
+            if(existe == 1){
+                return conn.createQuery("select * from administrativo where correo=:administrativoCorreo;")
+                    .addParameter("administrativoCorreo", administrativo.getCorreo())
+                    .executeAndFetch(Administrativo.class);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }
