@@ -5,7 +5,7 @@ public class Formulario {
     private Integer id;
     private String nombre;
     private String correo;
-    private String comentario;
+    private Integer status;
     private Integer id_diplomado;
 
     //Get y Set id
@@ -33,11 +33,11 @@ public class Formulario {
     }
 
     //Get y Set id
-    public String getComentario() {
-        return comentario;
+    public Integer getStatus() {
+        return status;
     }
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
     
     //Get y Set id

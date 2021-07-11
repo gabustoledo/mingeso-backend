@@ -35,7 +35,7 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
                     .addParameter("administrativoCorreo", administrativo.getCorreo())
                     .addParameter("administrativoContrasena", administrativo.getContrasena())
                     .addParameter("administrativoRol", administrativo.getRol())
-                    .addParameter("administrativoActivo", administrativo.getActivo())
+                    .addParameter("administrativoActivo", true)
                     .executeUpdate().getKey();
             administrativo.setId(insertedId);
             return administrativo;        

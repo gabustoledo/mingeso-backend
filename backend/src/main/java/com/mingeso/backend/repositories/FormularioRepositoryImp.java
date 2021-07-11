@@ -29,10 +29,10 @@ public class FormularioRepositoryImp implements FormularioRepository {
     @Override
     public Formulario createFormulario(Formulario formulario) {
         try(Connection conn = sql2o.open()){
-            int insertedId = (int) conn.createQuery("INSERT INTO formulario (nombre, correo, comentario, id_diplomado) values (:formularioNombre,:formularioCorreo,:formularioComentario,:formularioIdDiplomado)", true)
+            int insertedId = (int) conn.createQuery("INSERT INTO formulario (nombre, correo, status, id_diplomado) values (:formularioNombre,:formularioCorreo,:formularioStatus,:formularioIdDiplomado)", true)
                     .addParameter("formularioNombre", formulario.getNombre())
                     .addParameter("formularioCorreo", formulario.getCorreo())
-                    .addParameter("formularioComentario", formulario.getComentario())
+                    .addParameter("formularioStatus", formulario.getStatus())
                     .addParameter("formularioIdDiplomado", formulario.getIdDiplomado())
                     .executeUpdate().getKey();
             formulario.setId(insertedId);
@@ -59,11 +59,11 @@ public class FormularioRepositoryImp implements FormularioRepository {
     @Override
     public void updateFormulario(Formulario formulario) {
         try(Connection conn = sql2o.open()){
-            conn.createQuery("Update formulario Set nombre = :formularioNombre, correo = :formularioCorreo, comentario = :formularioComentario, id_diplomado = :formularioIdDiplomado WHERE id = :formularioId")
+            conn.createQuery("Update formulario Set nombre = :formularioNombre, correo = :formularioCorreo, status = :formularioStatus, id_diplomado = :formularioIdDiplomado WHERE id = :formularioId")
                     .addParameter("formularioId", formulario.getId())
                     .addParameter("formularioNombre", formulario.getNombre())
                     .addParameter("formularioCorreo", formulario.getCorreo())
-                    .addParameter("formularioComentario", formulario.getComentario())
+                    .addParameter("formularioStatus", formulario.getStatus())
                     .addParameter("formularioIdDiplomado", formulario.getIdDiplomado())
                     .executeUpdate();
                    
