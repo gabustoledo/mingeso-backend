@@ -42,22 +42,22 @@ public class FileUploadController {
 		this.FormularioRepository = formularioRepository;
 	}
 
-	@GetMapping("/files")
+	@GetMapping("/postulacion")
 	public String listUploadedFiles(Model model) throws IOException {
 
-		model.addAttribute("files", storageService.loadAll().map(
-				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-						"serveFile", path.getFileName().toString()).build().toUri().toString())
-				.collect(Collectors.toList()));
+		//model.addAttribute("files", storageService.loadAll().map(
+		//		path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+		//				"serveFile", path.getFileName().toString()).build().toUri().toString())
+		//		.collect(Collectors.toList()));
 
 		return "uploadForm";
 	}
 
-	@GetMapping("/files/{filename:.+}")
+	@GetMapping("/files/{carpeta:.+}/{filename:.+}")
 	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename, @PathVariable String carpeta) {
 
-		Resource file = storageService.loadAsResource(filename);
+		Resource file = storageService.loadAsResource(carpeta + "/" + filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
 				"attachment; filename=\"" + file.getFilename() + "\"").body(file);
 	}
