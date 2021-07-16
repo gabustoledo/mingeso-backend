@@ -3,8 +3,8 @@ package com.mingeso.backend.models;
 public class AdministrativoDiplomado {
 
     private Integer id;
-    private Integer id_diplomado;
-	private Integer id_administrativo;
+    private Integer idDiplomado;
+	private Integer idAdministrativo;
 
     //Get y Set id
     public Integer getId() {
@@ -16,17 +16,17 @@ public class AdministrativoDiplomado {
     
     //Get y Set idDiplomado
     public Integer getIdDiplomado() {
-        return id_diplomado;
+        return idDiplomado;
     }
-    public void setIdDiplomado(Integer id_diplomado) {
-        this.id_diplomado = id_diplomado;
+    public void setIdDiplomado(Integer idDiplomado) {
+        this.idDiplomado = idDiplomado;
     }
 
 		//Get y Set Administrativo
     public Integer getIdAdministrativo() {
-			return id_administrativo;
+			return idAdministrativo;
 	}
-	public void setIdAdministrativo(Integer id_administrativo) {
-			this.id_administrativo = id_administrativo;
+	public void setIdAdministrativo(Integer idAdministrativo) {
+			this.idAdministrativo = idAdministrativo;
 	}
 }

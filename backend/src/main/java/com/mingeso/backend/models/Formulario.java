@@ -6,7 +6,7 @@ public class Formulario {
     private String nombre;
     private String correo;
     private Integer status;
-    private Integer id_diplomado;
+    private Integer idDiplomado;
 
     //Get y Set id
     public Integer getId() {
@@ -42,9 +42,9 @@ public class Formulario {
     
     //Get y Set id
     public Integer getIdDiplomado() {
-        return id_diplomado;
+        return idDiplomado;
     }
-    public void setIdDiplomado(Integer id_diplomado) {
-        this.id_diplomado = id_diplomado;
+    public void setIdDiplomado(Integer idDiplomado) {
+        this.idDiplomado = idDiplomado;
     }
 }

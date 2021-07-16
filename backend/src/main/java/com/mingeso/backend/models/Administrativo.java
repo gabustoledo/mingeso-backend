@@ -6,7 +6,7 @@ public class Administrativo {
     private String nombre;
     private String rut;
     private String correo;
-    private String pass;
+    private String contrasena;
     private Integer rol;
     private Boolean activo;
 
@@ -44,10 +44,10 @@ public class Administrativo {
 
     //Get y Set pass
     public String getContrasena() {
-        return pass;
+        return contrasena;
     }
-    public void setContrasena(String pass) {
-        this.pass = pass;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     //Get y Set rol
