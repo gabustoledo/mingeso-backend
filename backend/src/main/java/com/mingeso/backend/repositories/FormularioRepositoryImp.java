@@ -22,6 +22,13 @@ public class FormularioRepositoryImp implements FormularioRepository {
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM formulario").executeScalar(Integer.class);
         }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        } 
+        finally{
+            conn.close();
+        } 
         return total;
     }
     
@@ -40,7 +47,10 @@ public class FormularioRepositoryImp implements FormularioRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
-        }  
+        } 
+        finally{
+            conn.close();
+        } 
     }
 
     // READ
@@ -52,6 +62,9 @@ public class FormularioRepositoryImp implements FormularioRepository {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        }
+        finally{
+            conn.close();
         }
     }
     
@@ -70,6 +83,9 @@ public class FormularioRepositoryImp implements FormularioRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }  
+        finally{
+            conn.close();
+        }
     }
 
     // DELETE
@@ -83,5 +99,8 @@ public class FormularioRepositoryImp implements FormularioRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }  
+        finally{
+            conn.close();
+        }
     }
 }

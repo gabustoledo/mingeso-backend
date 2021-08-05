@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.sql2o.Connection;
+import org.sql2o.Connection.close;
 import org.sql2o.Sql2o;
 
 import java.util.List;
@@ -22,6 +23,13 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM administrativo_diplomado").executeScalar(Integer.class);
         }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        } 
+        finally{
+            conn.close();
+        } 
         return total;
     }
     
@@ -35,10 +43,12 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
                     .executeUpdate().getKey();
 					administrativoDiplomado.setId(insertedId);
             return administrativoDiplomado;
-        }catch(Exception e){
+        } catch(Exception e){
             System.out.println(e.getMessage());
             return null;
-        }  
+        } finally {
+			conn.close();
+        }
     }
 
     // READ
@@ -50,6 +60,8 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        } finally {
+			conn.close();
         }
     }
     
@@ -63,9 +75,11 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
 										.addParameter("idDiplomado", administrativoDiplomado.getIdDiplomado())
                     .executeUpdate();
                    
-        }catch(Exception e){
+        } catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        } finally {
+			conn.close();
+        }
     }
     // DELETE
     @Override
@@ -75,8 +89,10 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
                     .addParameter("id", Id)
                     .executeUpdate();
             System.out.println("AdministrativoDiplomado eliminado");
-        }catch(Exception e){
+        } catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        } finally {
+			conn.close();
+        } 
     }
 }

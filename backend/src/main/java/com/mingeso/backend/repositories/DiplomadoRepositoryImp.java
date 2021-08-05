@@ -22,6 +22,13 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM diplomado").executeScalar(Integer.class);
         }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        } 
+        finally{
+            conn.close();
+        } 
         return total;
     }
     
@@ -38,7 +45,9 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
-        }  
+        }  finally {
+			conn.close();
+        }
     }
 
     // READ
@@ -50,6 +59,8 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        } finally {
+			conn.close();
         }
     }
     
@@ -65,7 +76,9 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
                    
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        }  finally {
+			conn.close();
+        }
     }
     // DELETE
     @Override
@@ -77,6 +90,8 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
             System.out.println("Diplomado eliminado");
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        }  finally {
+			conn.close();
+        }
     }
 }

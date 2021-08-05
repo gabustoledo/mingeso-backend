@@ -22,9 +22,18 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM administrativo").executeScalar(Integer.class);
         }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        } 
+        finally{
+            conn.close();
+        } 
         return total;
     }
-    
+
+    //critical smell
+    private static final String ACTION_1 = "administrativoCorreo";
     // CREATE
     @Override
     public Administrativo createAdministrativo(Administrativo administrativo) {
@@ -32,17 +41,19 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             int insertedId = (int) conn.createQuery("INSERT INTO administrativo (nombre, rut, correo, pass, rol, activo) values (:administrativoNombre,:administrativoRut,:administrativoCorreo,:administrativoContrasena,:administrativoRol,:administrativoActivo)", true)
                     .addParameter("administrativoNombre", administrativo.getNombre())
                     .addParameter("administrativoRut", administrativo.getRut())
-                    .addParameter("administrativoCorreo", administrativo.getCorreo())
+                    .addParameter(ACTION_1, administrativo.getCorreo())
                     .addParameter("administrativoContrasena", administrativo.getContrasena())
                     .addParameter("administrativoRol", administrativo.getRol())
                     .addParameter("administrativoActivo", true)
                     .executeUpdate().getKey();
             administrativo.setId(insertedId);
             return administrativo;        
-        }catch(Exception e){
+        } catch(Exception e){
             System.out.println(e.getMessage());
             return null;
-        }  
+        } finally {
+			conn.close();
+        }
     }
 
     // READ
@@ -54,6 +65,8 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        } finally {
+			conn.close();
         }
     }
     
@@ -64,7 +77,7 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             conn.createQuery("Update administrativo Set nombre = :administrativoNombre, rut = :administrativoRut, correo = :administrativoCorreo, pass = :administrativoContrasena, rol = :administrativoRol, activo = :administrativoActivo WHERE id = :Id")
                     .addParameter("administrativoNombre", administrativo.getNombre())
                     .addParameter("administrativoRut", administrativo.getRut())
-                    .addParameter("administrativoCorreo", administrativo.getCorreo())
+                    .addParameter(ACTION_1, administrativo.getCorreo())
                     .addParameter("administrativoContrasena", administrativo.getContrasena())
                     .addParameter("administrativoRol", administrativo.getRol())
                     .addParameter("administrativoActivo", administrativo.getActivo())
@@ -73,7 +86,9 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
                    
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        }  finally {
+			conn.close();
+        }
     }
 
     // DELETE
@@ -86,7 +101,9 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             System.out.println("Administrativo eliminada");
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        }  finally {
+			conn.close();
+        }
     }
 
     // LOGIN
@@ -95,17 +112,19 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
         int existe = 0;
         try(Connection conn = sql2o.open()){
             existe = conn.createQuery("select count(*) from administrativo where correo=:administrativoCorreo and pass=:administrativoPass;")
-                .addParameter("administrativoCorreo", administrativo.getCorreo())
+                .addParameter(ACTION_1, administrativo.getCorreo())
                 .addParameter("administrativoPass", administrativo.getContrasena())
                 .executeScalar(Integer.class);
 
             if(existe == 1){
                 return conn.createQuery("select * from administrativo where correo=:administrativoCorreo;")
-                    .addParameter("administrativoCorreo", administrativo.getCorreo())
+                    .addParameter(ACTION_1, administrativo.getCorreo())
                     .executeAndFetch(Administrativo.class);
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
+        }finally {
+			conn.close();
         }
         return null;
     }

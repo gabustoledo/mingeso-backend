@@ -21,6 +21,11 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM repositorio").executeScalar(Integer.class);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }finally {
+			conn.close();
         }
         return total;
     }
@@ -39,7 +44,9 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
         }catch(Exception e){
             System.out.println(e.getMessage());
             return null;
-        }  
+        }finally {
+			conn.close();
+        }
     }
 
     // READ
@@ -51,6 +58,8 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
+        } finally {
+			conn.close();
         }
     }
     
@@ -67,7 +76,9 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
                    
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        } finally {
+			conn.close();
+        }
     }
 
     // DELETE
@@ -80,6 +91,8 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
             System.out.println("Repositorio eliminado");
         }catch(Exception e){
             System.out.println(e.getMessage());
-        }  
+        } finally {
+			conn.close();
+        }
     }
 }
