@@ -19,38 +19,39 @@ import java.util.List;
 @RestController
 public class DiplomadoService {
 
-    private final DiplomadoRepository DiplomadoRepository;
+    private final DiplomadoRepository diplomadoRepository;
+
     DiplomadoService(DiplomadoRepository diplomadoRepository){
-        this.DiplomadoRepository = diplomadoRepository;
+        this.diplomadoRepository = diplomadoRepository;
     }
 
     @GetMapping("/Diplomado")
     public List<Diplomado> getAllDiplomados() {
-        return DiplomadoRepository.getAllDiplomados();
+        return diplomadoRepository.getAllDiplomados();
     }
 
     @GetMapping("/Diplomado/count")
     public String countDiplomados(){
-        int total = DiplomadoRepository.countDiplomados();
+        int total = diplomadoRepository.countDiplomados();
         return String.format("Tienes %s Diplomados!!", total);
     }
     
     @PostMapping("/Diplomado")
     @ResponseBody
-    public Diplomado createDiplomado(@RequestBody Diplomado Diplomado){
-        Diplomado result = DiplomadoRepository.createDiplomado(Diplomado);
+    public Diplomado createDiplomado(@RequestBody Diplomado diplomado){
+        Diplomado result = diplomadoRepository.createDiplomado(diplomado);
         return result;
     }
 
     @PutMapping(value = "/DiplomadoUpdate")
     @ResponseBody
-    public void updateDiplomado(@RequestBody Diplomado Diplomado){
-        DiplomadoRepository.updateDiplomado(Diplomado);
+    public void updateDiplomado(@RequestBody Diplomado diplomado){
+        diplomadoRepository.updateDiplomado(diplomado);
     }
 
     @DeleteMapping(value = "/DiplomadoDelete/{id}")
     public void deleteDiplomado(@PathVariable("id") Integer id){
-        DiplomadoRepository.deleteDiplomado(id);
+        diplomadoRepository.deleteDiplomado(id);
     }
 
 

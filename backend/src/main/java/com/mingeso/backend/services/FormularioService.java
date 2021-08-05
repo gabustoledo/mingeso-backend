@@ -19,40 +19,39 @@ import java.util.List;
 @RestController
 public class FormularioService {
 
-    private final FormularioRepository FormularioRepository;
+    private final FormularioRepository formularioRepository;
+
     FormularioService(FormularioRepository formularioRepository){
-        this.FormularioRepository = formularioRepository;
+        this.formularioRepository = formularioRepository;
     }
 
     @GetMapping("/Formulario")
     public List<Formulario> getAllEmergencys() {
-        return FormularioRepository.getAllFormularios();
+        return formularioRepository.getAllFormularios();
     }
 
     @GetMapping("/Formulario/count")
     public String countFormularios(){
-        int total = FormularioRepository.countFormularios();
+        int total = formularioRepository.countFormularios();
         return String.format("Tienes %s Formularios!!", total);
     }
     
     @PostMapping("/Formulario")
     @ResponseBody
-    public Formulario createFormulario(@RequestBody Formulario Formulario){
-        Formulario result = FormularioRepository.createFormulario(Formulario);
+    public Formulario createFormulario(@RequestBody Formulario formulario){
+        Formulario result = formularioRepository.createFormulario(formulario);
         return result;
     }
 
     @PutMapping(value = "/FormularioUpdate")
     @ResponseBody
-    public void updateFormulario(@RequestBody Formulario Formulario){
-        FormularioRepository.updateFormulario(Formulario);
+    public void updateFormulario(@RequestBody Formulario formulario){
+        formularioRepository.updateFormulario(formulario);
     }
 
     @DeleteMapping(value = "/FormularioDelete/{id}")
     public void deleteFormulario(@PathVariable("id") Integer id){
-        FormularioRepository.deleteFormulario(id);
+        formularioRepository.deleteFormulario(id);
     }
-
-
-    
+  
 }

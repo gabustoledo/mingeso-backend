@@ -19,38 +19,38 @@ import java.util.List;
 @RestController
 public class AdministrativoDiplomadoService {
 
-    private final AdministrativoDiplomadoRepository AdministrativoDiplomadoRepository;
+    private final AdministrativoDiplomadoRepository administrativoDiplomadoRepository;
     AdministrativoDiplomadoService(AdministrativoDiplomadoRepository administrativoDiplomadoRepository){
-        this.AdministrativoDiplomadoRepository = administrativoDiplomadoRepository;
+        this.administrativoDiplomadoRepository = administrativoDiplomadoRepository;
     }
 
     @GetMapping("/AdministrativoDiplomado")
     public List<AdministrativoDiplomado> getAllEmergencys() {
-        return AdministrativoDiplomadoRepository.getAllAdministrativoDiplomados();
+        return administrativoDiplomadoRepository.getAllAdministrativoDiplomados();
     }
 
     @GetMapping("/AdministrativoDiplomado/count")
     public String countAdministrativoDiplomados(){
-        int total = AdministrativoDiplomadoRepository.countAdministrativoDiplomados();
+        int total = administrativoDiplomadoRepository.countAdministrativoDiplomados();
         return String.format("Tienes %s Administrativos Diplomados!!", total);
     }
     
     @PostMapping("/AdministrativoDiplomado")
     @ResponseBody
-    public AdministrativoDiplomado createAdministrativoDiplomado(@RequestBody AdministrativoDiplomado AdministrativoDiplomado){
-        AdministrativoDiplomado result = AdministrativoDiplomadoRepository.createAdministrativoDiplomado(AdministrativoDiplomado);
+    public AdministrativoDiplomado createAdministrativoDiplomado(@RequestBody AdministrativoDiplomado administrativoDiplomado){
+        AdministrativoDiplomado result = administrativoDiplomadoRepository.createAdministrativoDiplomado(administrativoDiplomado);
         return result;
     }
 
     @PutMapping(value = "/AdministrativoDiplomadoUpdate")
     @ResponseBody
-    public void updateAdministrativoDiplomado(@RequestBody AdministrativoDiplomado AdministrativoDiplomado){
-        AdministrativoDiplomadoRepository.updateAdministrativoDiplomado(AdministrativoDiplomado);
+    public void updateAdministrativoDiplomado(@RequestBody AdministrativoDiplomado administrativoDiplomado){
+        administrativoDiplomadoRepository.updateAdministrativoDiplomado(administrativoDiplomado);
     }
 
     @DeleteMapping(value = "/AdministrativoDiplomadoDelete/{id}")
     public void deleteAdministrativoDiplomado(@PathVariable("id") Integer id){
-        AdministrativoDiplomadoRepository.deleteAdministrativoDiplomado(id);
+        administrativoDiplomadoRepository.deleteAdministrativoDiplomado(id);
     }
 
 

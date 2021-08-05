@@ -19,43 +19,43 @@ import java.util.List;
 @RestController
 public class AdministrativoService {
 
-    private final AdministrativoRepository AdministrativoRepository;
-    AdministrativoService(AdministrativoRepository AdministrativoRepository){
-        this.AdministrativoRepository = AdministrativoRepository;
+    private final AdministrativoRepository administrativoRepository;
+    AdministrativoService(AdministrativoRepository administrativoRepository){
+        this.administrativoRepository = administrativoRepository;
     }
 
     @GetMapping("/Administrativo")
     public List<Administrativo> getAllAdministrativos() {
-        return AdministrativoRepository.getAllAdministrativos();
+        return administrativoRepository.getAllAdministrativos();
     }
 
     @GetMapping("/Administrativo/count")
     public String countAdministrativos(){
-        int total = AdministrativoRepository.countAdministrativos();
+        int total = administrativoRepository.countAdministrativos();
         return String.format("Tienes %s Usuarios Administrativos!!", total);
     }
     
     @PostMapping("/Administrativo")
     @ResponseBody
-    public Administrativo createAdministrativo(@RequestBody Administrativo Administrativo){
-        Administrativo result = AdministrativoRepository.createAdministrativo(Administrativo);
+    public Administrativo createAdministrativo(@RequestBody Administrativo administrativo){
+        Administrativo result = administrativoRepository.createAdministrativo(administrativo);
         return result;
     }
 
     @PutMapping(value = "/AdministrativoUpdate")
     @ResponseBody
-    public void updateAdministrativo(@RequestBody Administrativo Administrativo){
-        AdministrativoRepository.updateAdministrativo(Administrativo);
+    public void updateAdministrativo(@RequestBody Administrativo administrativo){
+        administrativoRepository.updateAdministrativo(administrativo);
     }
 
     @DeleteMapping(value = "/AdministrativoDelete/{id}")
     public void deleteAdministrativo(@PathVariable("id") Integer id){
-        AdministrativoRepository.deleteAdministrativo(id);
+        administrativoRepository.deleteAdministrativo(id);
     }
 
     @PostMapping("/AdministrativoLogin")
     @ResponseBody
-    public List<Administrativo> login(@RequestBody Administrativo Administrativo){
-        return AdministrativoRepository.login(Administrativo);
+    public List<Administrativo> login(@RequestBody Administrativo administrativo){
+        return administrativoRepository.login(administrativo);
     }
 }
