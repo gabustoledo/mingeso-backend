@@ -9,6 +9,9 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.Collections;
 
 @Repository
 public class RepositorioRepositoryImp implements RepositorioRepository {
@@ -16,16 +19,14 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
     @Autowired
     private Sql2o sql2o;
 
+    // Create a Logger
+    Logger logger = Logger.getLogger(RepositorioRepositoryImp.class.getName());
+
     @Override
     public int countRepositorios() {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM repositorio").executeScalar(Integer.class);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }finally {
-			conn.close();
         }
         return total;
     }
@@ -42,10 +43,8 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
             repositorio.setId(insertedId);
             return repositorio;        
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
             return null;
-        }finally {
-			conn.close();
         }
     }
 
@@ -56,10 +55,8 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
             return conn.createQuery("select * from repositorio")
                     .executeAndFetch(Repositorio.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
+            return Collections.emptyList();
         }
     }
     
@@ -75,24 +72,20 @@ public class RepositorioRepositoryImp implements RepositorioRepository {
                     .executeUpdate();
                    
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        } finally {
-			conn.close();
-        }
+            logger.log(Level.WARNING, e.getMessage());
+        } 
     }
 
     // DELETE
     @Override
-    public void deleteRepositorio(Integer Id) {
+    public void deleteRepositorio(Integer id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM repositorio WHERE id = :id")
-                    .addParameter("id", Id)
+                    .addParameter("id", id)
                     .executeUpdate();
-            System.out.println("Repositorio eliminado");
+                    logger.log(Level.WARNING, "Repositorio eliminado");
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        } finally {
-			conn.close();
-        }
+            logger.log(Level.WARNING, e.getMessage());
+        } 
     }
 }

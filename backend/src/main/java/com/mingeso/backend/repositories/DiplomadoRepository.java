@@ -7,5 +7,5 @@ public interface DiplomadoRepository {
     public List<Diplomado> getAllDiplomados();
     public Diplomado createDiplomado(Diplomado diplomado);
     public void updateDiplomado(Diplomado diplomado);
-    public void deleteDiplomado(Integer Id);
+    public void deleteDiplomado(Integer id);
 }

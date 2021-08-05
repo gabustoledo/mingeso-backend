@@ -7,5 +7,5 @@ public interface AdministrativoDiplomadoRepository {
     public List<AdministrativoDiplomado> getAllAdministrativoDiplomados();
     public AdministrativoDiplomado createAdministrativoDiplomado(AdministrativoDiplomado administrativoDiplomado);
     public void updateAdministrativoDiplomado(AdministrativoDiplomado administrativoDiplomado);
-    public void deleteAdministrativoDiplomado(Integer Id);
+    public void deleteAdministrativoDiplomado(Integer id);
 }

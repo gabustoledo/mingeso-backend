@@ -48,9 +48,9 @@ public class AdministrativoService {
         AdministrativoRepository.updateAdministrativo(Administrativo);
     }
 
-    @DeleteMapping(value = "/AdministrativoDelete/{Id}")
-    public void deleteAdministrativo(@PathVariable("Id") Integer Id){
-        AdministrativoRepository.deleteAdministrativo(Id);
+    @DeleteMapping(value = "/AdministrativoDelete/{id}")
+    public void deleteAdministrativo(@PathVariable("id") Integer id){
+        AdministrativoRepository.deleteAdministrativo(id);
     }
 
     @PostMapping("/AdministrativoLogin")

@@ -4,11 +4,12 @@ import com.mingeso.backend.models.Administrativo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
+import java.util.Collections;
 
 @Repository
 public class AdministrativoRepositoryImp implements AdministrativoRepository {
@@ -16,19 +17,15 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
     @Autowired
     private Sql2o sql2o;
 
+    // Create a Logger
+    Logger logger = Logger.getLogger(AdministrativoRepositoryImp.class.getName());
+
     @Override
     public int countAdministrativos() {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM administrativo").executeScalar(Integer.class);
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        } 
-        finally{
-            conn.close();
-        } 
         return total;
     }
 
@@ -49,10 +46,8 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             administrativo.setId(insertedId);
             return administrativo;        
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
             return null;
-        } finally {
-			conn.close();
         }
     }
 
@@ -63,10 +58,8 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
             return conn.createQuery("select * from administrativo")
                     .executeAndFetch(Administrativo.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
+            return Collections.emptyList();
         }
     }
     
@@ -85,24 +78,20 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
                     .executeUpdate();
                    
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }  finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
     // DELETE
     @Override
-    public void deleteAdministrativo(Integer Id) {
+    public void deleteAdministrativo(Integer id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM administrativo WHERE id = :id")
-                    .addParameter("id", Id)
+                    .addParameter("id", id)
                     .executeUpdate();
-            System.out.println("Administrativo eliminada");
+            logger.log(Level.WARNING, "Administrativo eliminada");
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }  finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
@@ -122,10 +111,8 @@ public class AdministrativoRepositoryImp implements AdministrativoRepository {
                     .executeAndFetch(Administrativo.class);
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
         }
-        return null;
+        return Collections.emptyList();
     }
 }

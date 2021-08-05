@@ -7,5 +7,5 @@ public interface FormularioRepository {
     public List<Formulario> getAllFormularios();
     public Formulario createFormulario(Formulario formulario);
     public void updateFormulario(Formulario formulario);
-    public void deleteFormulario(Integer Id);
+    public void deleteFormulario(Integer id);
 }

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
+import java.util.Collections;
 
 @Repository
 public class FormularioRepositoryImp implements FormularioRepository {
@@ -16,19 +18,15 @@ public class FormularioRepositoryImp implements FormularioRepository {
     @Autowired
     private Sql2o sql2o;
 
+    // Create a Logger
+    Logger logger = Logger.getLogger(FormularioRepositoryImp.class.getName());
+
     @Override
     public int countFormularios() {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM formulario").executeScalar(Integer.class);
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        } 
-        finally{
-            conn.close();
-        } 
         return total;
     }
     
@@ -45,11 +43,8 @@ public class FormularioRepositoryImp implements FormularioRepository {
             formulario.setId(insertedId);
             return formulario;        
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
             return null;
-        } 
-        finally{
-            conn.close();
         } 
     }
 
@@ -60,11 +55,8 @@ public class FormularioRepositoryImp implements FormularioRepository {
             return conn.createQuery("select * from formulario")
                     .executeAndFetch(Formulario.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-        finally{
-            conn.close();
+            logger.log(Level.WARNING, e.getMessage());
+            return Collections.emptyList();
         }
     }
     
@@ -81,26 +73,20 @@ public class FormularioRepositoryImp implements FormularioRepository {
                     .executeUpdate();
                    
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }  
-        finally{
-            conn.close();
-        }
     }
 
     // DELETE
     @Override
-    public void deleteFormulario(Integer Id) {
+    public void deleteFormulario(Integer id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM formulario WHERE id = :id")
-                    .addParameter("id", Id)
+                    .addParameter("id", id)
                     .executeUpdate();
-            System.out.println("Formulario eliminado");
+            logger.log(Level.WARNING, "Formulario eliminado");
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }  
-        finally{
-            conn.close();
-        }
     }
 }

@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.sql2o.Connection;
-import org.sql2o.Connection.close;
 import org.sql2o.Sql2o;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
+import java.util.Collections;
 
 @Repository
 public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplomadoRepository {
@@ -17,20 +18,16 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
     @Autowired
     private Sql2o sql2o;
 
+    // Create a Logger
+    Logger logger = Logger.getLogger(AdministrativoDiplomadoRepositoryImp.class.getName());
+
     @Override
     public int countAdministrativoDiplomados() {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM administrativo_diplomado").executeScalar(Integer.class);
+            return total;
         }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        } 
-        finally{
-            conn.close();
-        } 
-        return total;
     }
     
     // CREATE
@@ -44,11 +41,9 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
 					administrativoDiplomado.setId(insertedId);
             return administrativoDiplomado;
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
             return null;
-        } finally {
-			conn.close();
-        }
+        } 
     }
 
     // READ
@@ -58,10 +53,8 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
             return conn.createQuery("select * from administrativo_diplomado")
                     .executeAndFetch(AdministrativoDiplomado.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
+            return Collections.emptyList();
         }
     }
     
@@ -76,23 +69,19 @@ public class AdministrativoDiplomadoRepositoryImp implements AdministrativoDiplo
                     .executeUpdate();
                    
         } catch(Exception e){
-            System.out.println(e.getMessage());
-        } finally {
-			conn.close();
-        }
+            logger.log(Level.WARNING, e.getMessage());
+        } 
     }
     // DELETE
     @Override
-    public void deleteAdministrativoDiplomado(@PathVariable Integer Id) {
+    public void deleteAdministrativoDiplomado(@PathVariable Integer id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM administrativo_diplomado WHERE id = :id")
-                    .addParameter("id", Id)
+                    .addParameter("id", id)
                     .executeUpdate();
-            System.out.println("AdministrativoDiplomado eliminado");
+            logger.log(Level.WARNING, "AdministrativoDiplomado eliminado");
         } catch(Exception e){
-            System.out.println(e.getMessage());
-        } finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
         } 
     }
 }

@@ -48,9 +48,9 @@ public class DiplomadoService {
         DiplomadoRepository.updateDiplomado(Diplomado);
     }
 
-    @DeleteMapping(value = "/DiplomadoDelete/{Id}")
-    public void deleteDiplomado(@PathVariable("Id") Integer Id){
-        DiplomadoRepository.deleteDiplomado(Id);
+    @DeleteMapping(value = "/DiplomadoDelete/{id}")
+    public void deleteDiplomado(@PathVariable("id") Integer id){
+        DiplomadoRepository.deleteDiplomado(id);
     }
 
 

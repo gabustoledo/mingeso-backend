@@ -48,9 +48,9 @@ public class RepositorioService {
 			repositorioRepository.updateRepositorio(repositorio);
     }
 
-    @DeleteMapping(value = "/RepositorioDelete/{Id}")
-    public void deleteRepositorio(@PathVariable("Id") Integer Id){
-			repositorioRepository.deleteRepositorio(Id);
+    @DeleteMapping(value = "/RepositorioDelete/{id}")
+    public void deleteRepositorio(@PathVariable("id") Integer id){
+			repositorioRepository.deleteRepositorio(id);
     }
 
 

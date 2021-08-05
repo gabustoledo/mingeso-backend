@@ -48,9 +48,9 @@ public class FormularioService {
         FormularioRepository.updateFormulario(Formulario);
     }
 
-    @DeleteMapping(value = "/FormularioDelete/{Id}")
-    public void deleteFormulario(@PathVariable("Id") Integer Id){
-        FormularioRepository.deleteFormulario(Id);
+    @DeleteMapping(value = "/FormularioDelete/{id}")
+    public void deleteFormulario(@PathVariable("id") Integer id){
+        FormularioRepository.deleteFormulario(id);
     }
 
 

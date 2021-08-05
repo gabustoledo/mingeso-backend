@@ -1,9 +1,9 @@
 package com.mingeso.backend.models;
 
 public class Operaciones {
-    public int primerNumero;
-    public int segundoNumero;
-    public int resultado;
+    private int primerNumero;
+    private int segundoNumero;
+    private int resultado;
 
     public int getPrimerNumero() {
         return primerNumero;
@@ -12,7 +12,7 @@ public class Operaciones {
     public void setPrimerNumero(int primerNumero) {
         this.primerNumero = primerNumero;
     }
-    //Martes 4 Mayo   
+     
     public int getSegundoNumero() {
         return segundoNumero;
     }
@@ -36,4 +36,4 @@ public class Operaciones {
     public void resta(){
         resultado = primerNumero - segundoNumero;
     }
-}//prueba
+}

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
+import java.util.Collections;
 
 @Repository
 public class DiplomadoRepositoryImp implements DiplomadoRepository {
@@ -16,18 +18,14 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
     @Autowired
     private Sql2o sql2o;
 
+    // Create a Logger
+    Logger logger = Logger.getLogger(DiplomadoRepositoryImp.class.getName());
+
     @Override
     public int countDiplomados() {
         int total = 0;
         try(Connection conn = sql2o.open()){
             total = conn.createQuery("SELECT COUNT(*) FROM diplomado").executeScalar(Integer.class);
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        } 
-        finally{
-            conn.close();
         } 
         return total;
     }
@@ -43,10 +41,8 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
 										diplomado.setId(insertedId);
             return diplomado;
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING,e.getMessage());
             return null;
-        }  finally {
-			conn.close();
         }
     }
 
@@ -57,10 +53,8 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
             return conn.createQuery("select * from diplomado")
                     .executeAndFetch(Diplomado.class);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-			conn.close();
+            logger.log(Level.WARNING,e.getMessage());
+            return Collections.emptyList();
         }
     }
     
@@ -75,23 +69,19 @@ public class DiplomadoRepositoryImp implements DiplomadoRepository {
                     .executeUpdate();
                    
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }  finally {
-			conn.close();
+            logger.log(Level.WARNING,e.getMessage());
         }
     }
     // DELETE
     @Override
-    public void deleteDiplomado(@PathVariable Integer Id) {
+    public void deleteDiplomado(@PathVariable Integer id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM diplomado WHERE id = :id")
-                    .addParameter("id", Id)
+                    .addParameter("id", id)
                     .executeUpdate();
-            System.out.println("Diplomado eliminado");
+            logger.log(Level.WARNING, "Diplomado eliminado");
         }catch(Exception e){
-            System.out.println(e.getMessage());
-        }  finally {
-			conn.close();
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 }

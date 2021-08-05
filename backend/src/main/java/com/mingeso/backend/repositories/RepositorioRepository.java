@@ -7,5 +7,5 @@ public interface RepositorioRepository {
     public List<Repositorio> getAllRepositorios();
     public Repositorio createRepositorio(Repositorio repositorio);
     public void updateRepositorio(Repositorio repositorio);
-    public void deleteRepositorio(Integer Id);
+    public void deleteRepositorio(Integer id);
 }

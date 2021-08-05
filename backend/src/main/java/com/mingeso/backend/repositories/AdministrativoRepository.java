@@ -7,6 +7,6 @@ public interface AdministrativoRepository {
     public List<Administrativo> getAllAdministrativos();
     public Administrativo createAdministrativo(Administrativo administrativo);
     public void updateAdministrativo(Administrativo administrativo);
-    public void deleteAdministrativo(Integer Id);
+    public void deleteAdministrativo(Integer id);
     public List<Administrativo> login(Administrativo administrativo);
 }
