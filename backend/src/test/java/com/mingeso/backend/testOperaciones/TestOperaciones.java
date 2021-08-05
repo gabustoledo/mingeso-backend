@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-public class TestOperaciones extends AbstractTest {
+class TestOperaciones extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -25,7 +25,7 @@ public class TestOperaciones extends AbstractTest {
     }
 
     @Test
-    public void sumaTest1() throws Exception {
+    void sumaTest1() throws Exception {
         Operaciones suma = new Operaciones();
 		suma.setPrimerNumero(10);
 		suma.setSegundoNumero(15);
@@ -46,7 +46,7 @@ public class TestOperaciones extends AbstractTest {
     }
 
     @Test
-    public void sumaTest2() throws Exception {
+    void sumaTest2() throws Exception {
         Operaciones suma = new Operaciones();
 		suma.setPrimerNumero(100);
 		suma.setSegundoNumero(200);
@@ -67,7 +67,7 @@ public class TestOperaciones extends AbstractTest {
     }
 
     @Test
-    public void restaTest1() throws Exception {
+    void restaTest1() throws Exception {
         Operaciones resta = new Operaciones();
 		resta.setPrimerNumero(50);
 		resta.setSegundoNumero(25);
@@ -88,7 +88,7 @@ public class TestOperaciones extends AbstractTest {
     }
 
     @Test
-    public void restaTest2() throws Exception {
+    void restaTest2() throws Exception {
         Operaciones resta = new Operaciones();
 		resta.setPrimerNumero(20);
 		resta.setSegundoNumero(14);

@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-public class TestFormulario extends AbstractTest {
+ class TestFormulario extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -27,7 +27,7 @@ public class TestFormulario extends AbstractTest {
     }
 
     @Test
-    public void testCreate() throws Exception {
+     void testCreate() throws Exception {
         
 		Formulario formulario = new Formulario(); 
 		formulario.setNombre("NombreTest");

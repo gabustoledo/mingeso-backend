@@ -38,8 +38,7 @@ public class AdministrativoService {
     @PostMapping("/Administrativo")
     @ResponseBody
     public Administrativo createAdministrativo(@RequestBody Administrativo administrativo){
-        Administrativo result = administrativoRepository.createAdministrativo(administrativo);
-        return result;
+        return administrativoRepository.createAdministrativo(administrativo);
     }
 
     @PutMapping(value = "/AdministrativoUpdate")

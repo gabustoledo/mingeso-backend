@@ -1,7 +1,6 @@
 package com.mingeso.backend.uploadingfiles;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 import com.mingeso.backend.models.Formulario;
 import com.mingeso.backend.repositories.FormularioRepository;
@@ -21,11 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mingeso.backend.uploadingfiles.storage.StorageFileNotFoundException;
-import com.mingeso.backend.uploadingfiles.storage.StorageProperties;
 import com.mingeso.backend.uploadingfiles.storage.StorageService;
 
 
@@ -34,22 +31,16 @@ import com.mingeso.backend.uploadingfiles.storage.StorageService;
 public class FileUploadController {
 
 	private final StorageService storageService;
-	private final FormularioRepository FormularioRepository;
+	private final FormularioRepository formularioRepository;
 
 	@Autowired
 	public FileUploadController(StorageService storageService, FormularioRepository formularioRepository) {
 		this.storageService = storageService;
-		this.FormularioRepository = formularioRepository;
+		this.formularioRepository = formularioRepository;
 	}
 
 	@GetMapping("/postulacion")
 	public String listUploadedFiles(Model model) throws IOException {
-
-		//model.addAttribute("files", storageService.loadAll().map(
-		//		path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-		//				"serveFile", path.getFileName().toString()).build().toUri().toString())
-		//		.collect(Collectors.toList()));
-
 		return "uploadForm";
 	}
 
@@ -75,7 +66,7 @@ public class FileUploadController {
 		formulario.setCorreo(correo);
 		formulario.setStatus(1);
 		formulario.setIdDiplomado(diplomado);
-		Formulario result = FormularioRepository.createFormulario(formulario);
+		Formulario result = formularioRepository.createFormulario(formulario);
 
 		Integer id = result.getId();
 			

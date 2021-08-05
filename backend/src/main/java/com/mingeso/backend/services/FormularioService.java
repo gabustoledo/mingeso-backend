@@ -39,8 +39,7 @@ public class FormularioService {
     @PostMapping("/Formulario")
     @ResponseBody
     public Formulario createFormulario(@RequestBody Formulario formulario){
-        Formulario result = formularioRepository.createFormulario(formulario);
-        return result;
+        return formularioRepository.createFormulario(formulario);
     }
 
     @PutMapping(value = "/FormularioUpdate")

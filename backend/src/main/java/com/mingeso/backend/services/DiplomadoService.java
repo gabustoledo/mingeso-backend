@@ -39,8 +39,7 @@ public class DiplomadoService {
     @PostMapping("/Diplomado")
     @ResponseBody
     public Diplomado createDiplomado(@RequestBody Diplomado diplomado){
-        Diplomado result = diplomadoRepository.createDiplomado(diplomado);
-        return result;
+        return diplomadoRepository.createDiplomado(diplomado);
     }
 
     @PutMapping(value = "/DiplomadoUpdate")

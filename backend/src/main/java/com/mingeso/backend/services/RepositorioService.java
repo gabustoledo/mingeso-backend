@@ -38,8 +38,7 @@ public class RepositorioService {
     @PostMapping("/Repositorio")
     @ResponseBody
     public Repositorio createRepositorio(@RequestBody Repositorio repositorio){
-			Repositorio result = repositorioRepository.createRepositorio(repositorio);
-      return result;
+			return repositorioRepository.createRepositorio(repositorio);
     }
 
     @PutMapping(value = "/RepositorioUpdate")
