@@ -28,5 +28,20 @@ pipeline {
                 }                
             }
         }
+
+        stage('Docker Build'){
+            steps{
+                dir("/var/lib/jenkins/workspace/backend/backend"){
+                    sh 'docker build --build-arg JAR_FILE=build/libs/*.jar -t gabustoledo/repo-back .'
+                }        
+            }
+        }
+        stage('Docker Hub'){
+            steps{
+                dir("/var/lib/jenkins/workspace/backend/backend"){
+                    sh 'docker push gabustoledo/repo-back'
+                }
+            }
+        }
     }
 }
