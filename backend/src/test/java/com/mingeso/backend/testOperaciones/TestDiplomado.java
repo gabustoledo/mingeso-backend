@@ -26,7 +26,7 @@ class TestDiplomado extends AbstractTest {
     }
 
     @Test
-     void testCreate() throws Exception {
+    void testCreate() throws Exception {
         
 		Diplomado diplomado = new Diplomado(); 
 		diplomado.setNombre("diplomadoTest");

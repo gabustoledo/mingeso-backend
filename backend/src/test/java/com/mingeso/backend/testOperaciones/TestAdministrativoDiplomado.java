@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
     }
 
     @Test
-     void testCreate() throws Exception {
+    void testCreate() throws Exception {
         
 			AdministrativoDiplomado administrativoDiplomado = new AdministrativoDiplomado(); 
 			administrativoDiplomado.setIdDiplomado(1);

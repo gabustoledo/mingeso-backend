@@ -24,6 +24,7 @@ dependencies {
 
 	compile group: 'org.sql2o', name: 'sql2o', version: '1.6.0'
 	compile 'org.postgresql:postgresql:42.2.5'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testRuntime ('org.springframework.boot:spring-boot-starter-test')
