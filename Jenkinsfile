@@ -32,7 +32,6 @@ pipeline {
         stage('Docker Build'){
             steps{
                 dir("/var/lib/jenkins/workspace/backend/backend"){
-                    sh 'chmod +x docker'
                     sh 'docker build --build-arg JAR_FILE=build/libs/*.jar -t gabustoledo/repo-back .'
                 }        
             }
@@ -40,7 +39,6 @@ pipeline {
         stage('Docker Hub'){
             steps{
                 dir("/var/lib/jenkins/workspace/backend/backend"){
-                    sh 'chmod +x docker'
                     sh 'docker push gabustoledo/repo-back'
                 }
             }
