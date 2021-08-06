@@ -3,7 +3,7 @@ package com.mingeso.backend.testOperaciones;
 
 import static org.junit.Assert.assertEquals;
 
-import com.mingeso.backend.models.Formulario;
+import com.mingeso.backend.models.FormularioTest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
- class TestFormulario extends AbstractTest {
+public class TestFormulario extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -27,9 +27,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
     }
 
     @Test
-     void testCreate() throws Exception {
+    public void testCreate() throws Exception {
         
-		Formulario formulario = new Formulario(); 
+		FormularioTest formulario = new FormularioTest(); 
 		formulario.setNombre("NombreTest");
 		formulario.setCorreo("CorreoTest");
 		formulario.setStatus(1);
@@ -45,7 +45,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
         assertEquals(200, status);
 				
         String formularioResultado = mvcResult.getResponse().getContentAsString();
-        Formulario formularioFinal = gson.fromJson(formularioResultado, Formulario.class);
+        FormularioTest formularioFinal = gson.fromJson(formularioResultado, FormularioTest.class);
 
 		Integer uno = 1;
         assertEquals("NombreTest", formularioFinal.getNombre());

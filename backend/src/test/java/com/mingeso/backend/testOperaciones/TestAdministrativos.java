@@ -2,7 +2,7 @@ package com.mingeso.backend.testOperaciones;
 
 import static org.junit.Assert.assertEquals;
 
-import com.mingeso.backend.models.Administrativo;
+import com.mingeso.backend.models.AdministrativoTest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
- class TestAdministrativos extends AbstractTest {
+public class TestAdministrativos extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -26,9 +26,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
     }
 
     @Test
-     void testCreate() throws Exception {
+    public void testCreate() throws Exception {
         
-		Administrativo administrativo = new Administrativo(); 
+      AdministrativoTest administrativo = new AdministrativoTest(); 
 		administrativo.setNombre("NombreTest");
 		administrativo.setRut("RutTest");
 		administrativo.setCorreo("CorreoTest");
@@ -46,7 +46,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
         assertEquals(200, status);
 
         String administrativoResultado = mvcResult.getResponse().getContentAsString();
-        Administrativo administrativoFinal = gson.fromJson(administrativoResultado, Administrativo.class);
+        AdministrativoTest administrativoFinal = gson.fromJson(administrativoResultado, AdministrativoTest.class);
 
 				Integer uno = 1;
         assertEquals("NombreTest", administrativoFinal.getNombre());
