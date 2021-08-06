@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-class TestDiplomado extends AbstractTest {
+public class TestDiplomado extends AbstractTest {
     @Override
     @Before
     public void setUp() {
@@ -26,7 +26,7 @@ class TestDiplomado extends AbstractTest {
     }
 
     @Test
-    void testCreate() throws Exception {
+    public void testCreate() throws Exception {
         
 		Diplomado diplomado = new Diplomado(); 
 		diplomado.setNombre("diplomadoTest");
