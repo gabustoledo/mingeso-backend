@@ -28,7 +28,7 @@ public class TestAdministrativos extends AbstractTest {
     @Test
     public void testCreate() throws Exception {
         
-      AdministrativoTest administrativo = new AdministrativoTest(); 
+    AdministrativoTest administrativo = new AdministrativoTest(); 
 		administrativo.setNombre("NombreTest");
 		administrativo.setRut("RutTest");
 		administrativo.setCorreo("CorreoTest");
