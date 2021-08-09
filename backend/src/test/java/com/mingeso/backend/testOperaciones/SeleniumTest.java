@@ -12,10 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-//import org.testng.annotations.AfterTest;
-//import org.testng.annotations.BeforeTest;
-//import org.testng.annotations.Test;
  
 public class SeleniumTest{
  
@@ -27,10 +23,9 @@ public class SeleniumTest{
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("http://104.131.39.116:3000");
-		//driver.get("http://localhost:3000");
 	}
 	
-	@Test
+	//@Test
 	public void login() {
 		
 		driver.findElement(By.name("btnLoginEncabezado")).click();
