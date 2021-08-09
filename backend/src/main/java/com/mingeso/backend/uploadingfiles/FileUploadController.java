@@ -77,7 +77,7 @@ public class FileUploadController {
 		storageService.store(file4,id,"Curriculum_Vitae.pdf");
 		storageService.store(file5,id,"Ficha_de_inscripcion.pdf");
 
-		return "redirect:http://localhost:3000/PostulacionEnviada";
+		return "redirect:http://104.131.39.116:3000/PostulacionEnviada";
 	}
 
 	@ExceptionHandler(StorageFileNotFoundException.class)
