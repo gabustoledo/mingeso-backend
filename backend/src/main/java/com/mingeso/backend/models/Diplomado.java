@@ -22,7 +22,7 @@ public class Diplomado {
 				this.nombre = nombre;
 		}
 
-		//Get y Set objetivo
+		//Martes 10 agosto
     public String getObjetivo() {
 			return objetivo;
 		}
